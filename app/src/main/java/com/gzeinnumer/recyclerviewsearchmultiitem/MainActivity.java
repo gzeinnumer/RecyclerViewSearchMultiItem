@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
 
+        filterFunction(menu);
+
+        return true;
+    }
+
+    private void filterFunction(Menu menu) {
         MenuItem searchItem = menu.findItem(R.id.showSearchTitle);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
@@ -58,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        return true;
     }
 
     @Override
