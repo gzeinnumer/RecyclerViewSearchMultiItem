@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adapterRV = new AdapterRV(this, list);
+        adapterRV.setList(list);
         rv.setAdapter(adapterRV);
         rv.setLayoutManager(new LinearLayoutManager(this));
 

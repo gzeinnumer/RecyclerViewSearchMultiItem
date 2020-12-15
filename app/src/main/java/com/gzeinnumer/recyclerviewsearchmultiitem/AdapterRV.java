@@ -49,6 +49,12 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
         return list.size();
     }
 
+    public void setList(ArrayList<DataItem> list) {
+        this.list = list;
+        listFilter = new ArrayList<>(list);
+        notifyDataSetChanged();
+    }
+
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView tv1, tv2;
         public MyHolder(@NonNull View itemView) {
