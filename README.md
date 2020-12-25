@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
 - Adapter
 ```java
-```
 public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implements Filterable {
 
     private Context context;
@@ -138,7 +137,7 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
         }
     };
 }
-
+```
 ---
 
 ```
