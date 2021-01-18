@@ -84,14 +84,14 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
     public AdapterRV(Context context, ArrayList<DataItem> list) {
         this.context = context;
         this.list = list;
-        listFilter = new ArrayList<>(list);
+        this.listFilter = new ArrayList<>(list);
     }
 
     ...
 
     public void setList(ArrayList<DataItem> list) {
         this.list = list;
-        listFilter = new ArrayList<>(list);
+        this.listFilter = new ArrayList<>(list);
         notifyDataSetChanged();
     }
 
