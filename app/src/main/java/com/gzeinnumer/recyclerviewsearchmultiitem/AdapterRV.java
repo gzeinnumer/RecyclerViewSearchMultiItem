@@ -75,12 +75,6 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
         protected FilterResults performFiltering(CharSequence constraint) {
             List<DataItem> fildteredList = new ArrayList<>();
             if(constraint == null || constraint.length() == 0){
-                Collections.sort(listFilter, new Comparator<DataItem>() {
-                    @Override
-                    public int compare(DataItem o1, DataItem o2) {
-                        return o1.getStrTv2().toLowerCase().compareTo(o2.getStrTv2().toLowerCase());
-                    }
-                });
                 fildteredList.addAll(listFilter);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
