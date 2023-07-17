@@ -2,19 +2,19 @@ package com.gzeinnumer.recyclerviewsearchmultiitem;
 
 import java.util.ArrayList;
 
-class DataItem {
+//TODO tambah ini gzeinnumer
+class DataItemV2 {
     String strTv1, strTv2;
-    //TODO tambah ini gzeinnumer
-    int realIndex, spinnerIndex;
+    //['satu','dua','tiga']
+    int index, idSpinner;
     boolean isCheck = false;
     ArrayList<String> spinners;
 
-    //TODO tambah ini gzeinnumer
-    public DataItem(int index, String strTv1, String strTv2, int spinner, ArrayList<String> spinners) {
-        this.realIndex = index;
+    public DataItemV2(int index, String strTv1, String strTv2, int idSpinner, ArrayList<String> spinners) {
+        this.index = index;
         this.strTv1 = strTv1;
         this.strTv2 = strTv2;
-        this.spinnerIndex = spinner;
+        this.idSpinner = idSpinner;
         this.spinners = spinners;
     }
 
@@ -26,12 +26,12 @@ class DataItem {
         this.spinners = spinners;
     }
 
-    public int getSpinnerIndex() {
-        return spinnerIndex;
+    public int getIdSpinner() {
+        return idSpinner;
     }
 
-    public void setSpinnerIndex(int spinnerIndex) {
-        this.spinnerIndex = spinnerIndex;
+    public void setIdSpinner(int idSpinner) {
+        this.idSpinner = idSpinner;
     }
 
     public boolean isCheck() {
@@ -42,12 +42,12 @@ class DataItem {
         isCheck = check;
     }
 
-    public int getRealIndex() {
-        return realIndex;
+    public int getIndex() {
+        return index;
     }
 
-    public void setRealIndex(int realIndex) {
-        this.realIndex = realIndex;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getStrTv1() {
@@ -64,5 +64,17 @@ class DataItem {
 
     public void setStrTv2(String strTv2) {
         this.strTv2 = strTv2;
+    }
+
+    @Override
+    public String toString() {
+        return "DataItemV2{" +
+                "strTv1='" + strTv1 + '\'' +
+                ", strTv2='" + strTv2 + '\'' +
+                ", index=" + index +
+                ", idSpinner=" + idSpinner +
+                ", isCheck=" + isCheck +
+                ", spinners=" + spinners +
+                '}';
     }
 }

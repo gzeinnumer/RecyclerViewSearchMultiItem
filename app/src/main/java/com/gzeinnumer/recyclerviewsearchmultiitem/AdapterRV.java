@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implements Filterable {
@@ -22,9 +22,18 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
     private ArrayList<DataItem> listFilter;
     private View view;
 
-    public AdapterRV(Context context, ArrayList<DataItem> list) {
+    //TODO tambah ini gzeinnumer
+    CallBack callback;
+    //TODO tambah ini gzeinnumer
+    interface CallBack {
+        void checked(boolean isChecked, int index);
+    }
+
+    //TODO tambah ini gzeinnumer
+    public AdapterRV(Context context, ArrayList<DataItem> list, CallBack callBack) {
         this.context = context;
         this.list = list;
+        this.callback = callBack;
         listFilter = new ArrayList<>(list);
     }
 
@@ -38,10 +47,17 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
-
-        myHolder.tv1.setText(list.get(i).getStrTv1());
-        myHolder.tv2.setText(list.get(i).getStrTv2());
-
+        final DataItem dataItem = list.get(i);
+        myHolder.tv1.setText(dataItem.getStrTv1());
+        myHolder.tv2.setText(dataItem.getStrTv2());
+        //TODO tambah ini gzeinnumer
+        myHolder.tv2.setText(dataItem.getSpinners().toString());//
+        myHolder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                callback.checked(isChecked, dataItem.realIndex);
+            }
+        });
     }
 
     @Override
@@ -57,10 +73,15 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
 
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView tv1, tv2;
+        //TODO tambah ini gzeinnumer
+        CheckBox cb;
+
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            tv1=itemView.findViewById(R.id.tv1);
-            tv2=itemView.findViewById(R.id.tv2);
+            tv1 = itemView.findViewById(R.id.tv1);
+            tv2 = itemView.findViewById(R.id.tv2);
+            //TODO tambah ini gzeinnumer
+            cb = itemView.findViewById(R.id.cb);
         }
     }
 
@@ -74,13 +95,13 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<DataItem> fildteredList = new ArrayList<>();
-            if(constraint == null || constraint.length() == 0){
+            if (constraint == null || constraint.length() == 0) {
                 fildteredList.addAll(listFilter);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (DataItem item : listFilter){
-                    if( item.getStrTv2().toLowerCase().contains(filterPattern)){
+                for (DataItem item : listFilter) {
+                    if (item.getStrTv2().toLowerCase().contains(filterPattern)) {
                         fildteredList.add(item);
                     }
                 }
@@ -93,11 +114,10 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> implemen
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             list.clear();
-            list.addAll((List)results.values);
+            list.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };
-
 
 
 }
